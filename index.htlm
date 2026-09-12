@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Semen Romanovich - Tow & Diagnostic Services</title>
+  <style>
+    :root {
+      --primary: #0056b3;       /* Professional blue */
+      --primary-dark: #004494;
+      --bg-light: #f0f4f8;
+      --panel-bg: #ffffff;
+      --text-main: #2c3e50;
+      --text-secondary: #7f8c8d;
+      --bubble-client: #e3f2fd;
+      --bubble-agent: #ffffff;
+      --border: #dbe2eb;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg-light);
+      color: var(--text-main);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    /* Hero Section */
+    .hero {
+      text-align: center;
+      max-width: 600px;
+      width: 100%;
+      background: white;
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      margin-bottom: 30px;
+      border-left: 5px solid var(--primary);
+    }
+
+    .hero h1 { font-size: 28px; margin-bottom: 10px; color: var(--primary-dark); }
+    .hero p.age { color: var(--text-secondary); font-size: 16px; margin-bottom: 20px; }
+    .hero .services {
+      background: #f8f9fa;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+    .services strong { color: var(--primary); }
+
+    .price-tag {
+      display: inline-block;
+      background: var(--primary);
+      color: white;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    .contact-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--primary-dark);
+      color: white;
+      padding: 12px 24px;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: 600;
+      transition: background 0.3s;
+      margin-top: 20px;
+    }
+    .contact-btn:hover { background: var(--primary); }
+
+    /* Chat Container */
+    .chat-container {
+      width: 100%;
+      max-width: 420px;
+      height: 65vh;
+      background: var(--panel-bg);
+      border-radius: 16px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .chat-header {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border);
+      background: #fff;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .header-info h3 { margin: 0; font-size: 16px; color: var(--text-main); }
+    .header-info p { margin: 4px 0 0; font-size: 13px; color: var(--text-secondary); }
+
+    .chat-body {
+      flex: 1;
+      padding: 20px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      scrollbar-width: thin;
+      scrollbar-color: var(--border) transparent;
+    }
+
+    .message {
+      max-width: 85%;
+      padding: 12px 16px;
+      border-radius: 14px;
+      line-height: 1.5;
+      font-size: 14px;
+      position: relative;
+      word-wrap: break-word;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+
+    .message.client {
+      align-self: flex-end;
+      background-color: var(--bubble-client);
+      border-bottom-right-radius: 2px;
+      color: var(--text-main);
+    }
+
+    .message.agent {
+      align-self: flex-start;
+      background-color: var(--bubble-agent);
+      border: 1px solid var(--border);
+      color: var(--text-main);
+    }
+
+    .typing-indicator {
+      font-size: 12px;
+      color: var(--text-secondary);
+      text-align: center;
+      margin-top: 8px;
+      opacity: 0.8;
+      display: none; /* Hidden by default */
+    }
+
+    .chat-footer {
+      padding: 16px 20px;
+      background: #fff;
+      border-top: 1px solid var(--border);
+      display: flex;
+      gap: 12px;
+    }
+
+    input[type="text"] {
+      flex: 1;
+      padding: 12px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      outline: none;
+      font-size: 14px;
+      transition: border-color 0.2s;
+    }
+
+    input[type="text"]:focus { border-color: var(--primary); }
+
+    button.send-btn {
+      width: 44px;
+      height: 44px;
+      border: none;
+      background: var(--primary);
+      color: white;
+      border-radius: 10px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+
+    button.send-btn:hover { background: var(--primary-dark); }
+  </style>
+</head>
+<body>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1>Semen Romanovich</h1>
+    <p class="age">20 years old • Professional Tow Truck Driver & Mechanic</p>
+    
+    <div class="services">
+      <strong>Services I provide:</strong><br>
+      • Emergency Tow Truck Service<br>
+      • Vehicle Diagnostic Checks<br>
+      • Transport to Auto Repair Shop<br>
+      • On-site Repairs (if possible)
+    </div>
+
+    <span class="price-tag">Starting Price: 4000 ₽</span>
+
+    <a href="mailto:semen.romanovich@gmail.com" class="contact-btn">
+      ✉️ Contact via Gmail
+    </a>
+  </section>
+
+  <!-- Chat Interface -->
+  <div class="chat-container">
+    <div class="chat-header">
+      <div class="avatar">SR</div>
+      <div class="header-info">
+        <h3>Semen's Service</h3>
+        <p>Online now • Fast response</p>
+      </div>
+    </div>
+
+    <div class="chat-body" id="chatBody">
+      <!-- Initial Message -->
+      <div class="message agent">
+        Hi! I'm Semen. I'll help you with your car. Whether you need a tow, a diagnosis, or transport to a shop, I'm here. Starting price is 4000 ₽. Where are you located?
+      </div>
+    </div>
+
+    <div class="typing-indicator" id="typingIndicator">
+      Semen is typing...
+    </div>
+
+    <div class="chat-footer">
+      <input type="text" id="userInput" placeholder="Describe your issue..." />
+      <button class="send-btn" id="sendBtn" onclick="sendMessage()">➤</button>
+    </div>
+  </div>
+
+  <script>
+    const chatBody = document.getElementById('chatBody');
+    const userInput = document.getElementById('userInput');
+    const typingIndicator = document.getElementById('typingIndicator');
+
+    // Custom responses tailored to Semen's services
+    const agentResponses = [
+      "Got it. I'll head to your location right away. Do you have the car keys ready?",
+      "I can do a quick diagnostic check on site. It usually takes 15-20 minutes.",
+      "If the car can't be fixed on the road, I'll transport it safely to the nearest repair shop.",
+      "The 4000₽ covers the first hour and basic towing. Extra mileage or complex repairs are calculated separately.",
+      "Don't worry, I've handled similar cases before. I'll get your car moving again."
+    ];
+
+    function appendMessage(text, sender) {
+      const msgDiv = document.createElement('div');
+      msgDiv.className = `message ${sender}`;
+      msgDiv.textContent = text;
+      chatBody.appendChild(msgDiv);
+      chatBody.scrollTop = chatBody.scrollHeight;
+    }
+
+    async function sendMessage() {
+      const text = userInput.value.trim();
+      if (!text) return;
+
+      // Show client message
+      appendMessage(text, 'client');
+      userInput.value = '';
+
+      // Simulate typing
+      typingIndicator.style.display = 'block';
+      chatBody.scrollTop = chatBody.scrollHeight;
+
+      await new Promise(resolve => setTimeout(resolve, 1500)); // Realistic delay
+
+      // Choose a relevant response based on keywords or random
+      let response = agentResponses[Math.floor(Math.random() * agentResponses.length)];
+      
+      // Keyword-based logic for better demo flow
+      const lowerText = text.toLowerCase();
+      if (lowerText.includes('price') || lowerText.includes('cost')) {
+        response = "As mentioned, the starting price is 4000₽. This includes the first hour and standard towing. Any extra work or long distance will be added to the total.";
+      } else if (lowerText.includes('diagnostic') || lowerText.includes('check')) {
+        response = "I can perform a full vehicle diagnostic on site. I have a scanner with me. Let me know if you want me to check the engine codes first.";
+      } else if (lowerText.includes('shop') || lowerText.includes('repair')) {
+        response = "Yes, I can transport your car to a trusted repair shop. If the issue is simple, I might even fix it myself on the spot to save you time.";
+      }
+
+      appendMessage(response, 'agent');
+      typingIndicator.style.display = 'none';
+      chatBody.scrollTop = chatBody.scrollHeight;
+    }
+
+    userInput.addEventListener('keypress', e => {
+      if (e.key === 'Enter') sendMessage();
+    });
+  </script>
+</body>
+</html>
